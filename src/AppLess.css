@@ -12,23 +12,8 @@ code {
   display: grid;
   width: 1200px;
   grid-template-areas: 'h h' 'n c';
-  grid-template-rows: 60px 1fr;
-  grid-template-columns: 2fr 10fr ;
+  grid-template-rows: 160px 1fr;
+  grid-template-columns: 500px 700px ;
   grid-gap: 10px;
-}
-.header {
-  grid-area: h;
-  background: aqua;
-}
-.header img {
-  height: 20px;
-}
-.nav {
-  grid-area: n;
-  background: green;
-}
-.content {
-  grid-area: c;
-  background: red;
 }
 /*# sourceMappingURL=AppLess.css.map */
