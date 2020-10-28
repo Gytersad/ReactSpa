@@ -13,7 +13,14 @@ code {
   width: 1200px;
   grid-template-areas: 'h h' 'n c';
   grid-template-rows: 160px 1fr;
-  grid-template-columns: 500px 700px ;
+  grid-template-columns: 500px 700px;
   grid-gap: 10px;
+}
+.app-wrapper-content {
+  grid-area: c;
+  background: blueviolet;
+}
+.app-wrapper-content img {
+  width: 600px;
 }
 /*# sourceMappingURL=AppLess.css.map */

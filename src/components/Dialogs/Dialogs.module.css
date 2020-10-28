@@ -1,0 +1,14 @@
+.dialogs {
+  display: grid;
+  grid-template-columns: 2fr 10fr;
+}
+.dialogs .dialogItems {
+  padding: 10px;
+}
+.dialogs .dialogItems .active {
+  color: gold;
+}
+.dialogs .messages {
+  padding: 10px;
+}
+/*# sourceMappingURL=Dialogs.module.css.map */
