@@ -11,4 +11,7 @@
 .dialogs .messages {
   padding: 10px;
 }
+.dialogs .messages .message {
+  color: white;
+}
 /*# sourceMappingURL=Dialogs.module.css.map */
