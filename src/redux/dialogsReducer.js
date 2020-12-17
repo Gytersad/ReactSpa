@@ -3,10 +3,10 @@ const SEND_MESSAGE = 'SEND-MESSAGE';
 
 let initialState = {
     dialogs: [
-        {id: 1, name: 'Iakov'},
-        {id: 2, name: 'Dima'},
-        {id: 3, name: 'Grisha'},
-        {id: 4, name: 'Serega'}],
+        {id: 1, name: 'Yakov'},
+        {id: 2, name: 'Dmitriy'},
+        {id: 3, name: 'Artem'},
+        {id: 4, name: 'Sergey'}],
     messages: [
         {id: 1, message: 'Hi'},
         {id: 2, message: 'Yo'},
@@ -14,26 +14,27 @@ let initialState = {
     newMessageBody: ''
 }
 
-const dialogsReducer = (state = initialState, action) =>{
+const dialogsReducer = (state = initialState, action) => {
 
     switch (action.type) {
-        case UPDATE_NEW_MESSAGE_BODY: {
-            let stateCopy = {...state};
-            stateCopy.newMessageBody = action.newText;
-            return stateCopy;
-        }
         case SEND_MESSAGE:
-            let stateCopy = {...state};
-            let body = stateCopy.newMessageBody;
-            stateCopy.newMessageBody = '';
-            stateCopy.messages.push({id: 6, message: body});
-            return stateCopy;
+            let body = state.newMessageBody;
+            return {
+                ...state,
+                newMessageBody: '',
+                messages: [...state.messages, {id: action.messageId, message: body}]
+            }
+        case UPDATE_NEW_MESSAGE_BODY:
+            return {
+                ...state,
+                newMessageBody: action.newText
+            }
         default:
             return state;
     }
 }
 
 export const updateNewMessageBodyCreator = (body) => ({type: UPDATE_NEW_MESSAGE_BODY, newText: body})
-export const sendMessageCreator = () => ({type: SEND_MESSAGE})
+export const sendMessageCreator = (messageId) => ({type: SEND_MESSAGE, messageId: messageId})
 
 export default dialogsReducer

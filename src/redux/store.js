@@ -13,10 +13,10 @@ let store = {
         },
         dialogsPage: {
             dialogs: [
-                {id: 1, name: 'Iakov'},
-                {id: 2, name: 'Dima'},
-                {id: 3, name: 'Grisha'},
-                {id: 4, name: 'Serega'}],
+                {id: 1, name: 'Yakov'},
+                {id: 2, name: 'Dmitriy'},
+                {id: 3, name: 'Artem'},
+                {id: 4, name: 'Sergey'}],
             messages: [
                 {id: 1, message: 'Hi'},
                 {id: 2, message: 'Yo'},
@@ -42,9 +42,6 @@ let store = {
         this._callSubscriber(this._state);
     }
 }
-
-
-
 
 
 export default store
