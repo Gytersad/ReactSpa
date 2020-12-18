@@ -7,7 +7,7 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
-.app-wrapper {
+.appWrapper {
   margin: 0 auto;
   display: grid;
   width: 1200px;
@@ -16,11 +16,8 @@ code {
   grid-template-columns: 500px 700px;
   grid-gap: 10px;
 }
-.app-wrapper-content {
+.appWrapperContent {
   grid-area: c;
   background: blueviolet;
 }
-.app-wrapper-content img {
-  width: 600px;
-}
-/*# sourceMappingURL=AppLess.css.map */
+/*# sourceMappingURL=AppLess.module.css.map */
