@@ -1,75 +1,60 @@
 import React from "react";
 import c from './Users.module.css';
+import * as axios from 'axios';
+import logo from '../../logo.svg'
 
-
-const Users = (props) => {
-
-
-    if (props.users.length === 0) {
-        props.setUsers([{
-            id: 1,
-            photoUrl: 'https://cdna.artstation.com/p/assets/images/images/024/241/176/large/_z-ed_-da.jpg?1581777298',
-            followed: false,
-            fullName: 'Yakov',
-            status: 'YO!',
-            location: {city: 'Moscow', country: 'Russia'}
-        }, {
-            id: 2,
-            photoUrl: 'https://cdna.artstation.com/p/assets/images/images/024/241/176/large/_z-ed_-da.jpg?1581777298',
-            followed: false,
-            fullName: 'Igor',
-            status: 'POG!',
-            location: {city: 'Omsk', country: 'Russia'}
-        }, {
-            id: 3,
-            photoUrl: 'https://cdna.artstation.com/p/assets/images/images/024/241/176/large/_z-ed_-da.jpg?1581777298',
-            followed: true,
-            fullName: 'Ivan',
-            status: 'Hello!',
-            location: {city: 'Minsk', country: 'Belarus'}
-        }])
+class Users extends React.Component{
+    componentDidMount(){
+        axios.get('https://social-network.samuraijs.com/api/1.0/users')
+            .then(response => {
+                this.props.setUsers(response.data.items)
+            })
     }
-    return (
-        <div className={c.content}>
-            {
-                props.users.map(u =>
-                    <div key={u.id}>
+    render() {
+       return (
+           <div className={c.content}>
+            {this.props.users.map(u =><div key={u.id}>
                         <span>
                             <div>
-                                <img src={u.photoUrl} alt="#" className={c.UserAva}/>
+                                <img
+                                    src={
+                                        u.photos.small != null
+                                            ?
+                                            u.photos.small
+                                            :
+                                            logo
+                                    }
+                                    alt="#" className={c.UserAva}/>
                             </div>
                             <div>
                                 {u.followed
                                     ?
                                     <button onClick={() => {
-                                        props.unfollowUser(u.id)
+                                        this.props.unfollowUser(u.id)
                                     }}>
                                         UnFollow
                                     </button>
                                     :
                                     <button onClick={() => {
-                                        props.followUser(u.id)
+                                        this.props.followUser(u.id)
                                     }}>
                                         Follow
                                     </button>
                                 }
                             </div>
                         </span>
-                        <span>
-                            <div>{u.fullName}</div>
+                <span>
+                            <div>{u.name}</div>
                             <div>{u.status}</div>
                         </span>
-                        <span>
-                            <div>{u.location.country}</div>
-                            <div>{u.location.city}</div>
+                <span>
+                            <div>{'u.location.country'}</div>
+                            <div>{'u.location.city'}</div>
                         </span>
-                    </div>
-                )
-            }
+            </div>)}
         </div>
-    );
-
-
+       )}
 }
+
 
 export default Users
