@@ -5,4 +5,8 @@
   height: 200px;
   width: auto;
 }
+.selectedPage {
+  font-weight: bold;
+  font-size: larger;
+}
 /*# sourceMappingURL=Users.module.css.map */

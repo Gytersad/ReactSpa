@@ -1,13 +1,17 @@
 import React from "react";
 import c from './ProfileInfo.module.css';
+import Preloader from "../../Preloader/Preloader";
 
-const ProfileInfo = () => {
-    return(
+const ProfileInfo = (props) => {
+    if (!props.profile) {
+        return <Preloader/>
+    } else return (
         <div className={c.content}>
-            <h1>Main Content</h1>
-            <img src="https://of-crimea.ru/plug/Peschanye-plyazhi-Kryma.jpg" alt=""/>
+            <h1>{props.profile.fullName}</h1>
+            <img src={props.profile.photos.large} alt='#'/>
             <div className={c.discriptionBlock}>
-                Ava +description
+                <p>{props.profile.lookingForAJobDescription}</p>
+                <p>{props.profile.contacts.github}</p>
             </div>
         </div>
     );
