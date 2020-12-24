@@ -1,3 +1,5 @@
+import {usersAPI} from "../api/api";
+
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const TOGGLE_FETCHING = 'TOGGLE-FETCHING'
@@ -46,5 +48,17 @@ export const addPostActionCreator = (postId) => ({type: ADD_POST, postId: postId
 export const updateNewPostTextActionCreator = (text) => ({type: UPDATE_NEW_POST_TEXT, newText: text})
 export const toggleFetching = (isFetching) => ({type: TOGGLE_FETCHING, isFetching})
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile})
+
+export const getUserProfileThank = (userId) =>{
+    return (dispatch) => {
+        dispatch(toggleFetching(true))
+        usersAPI.getProfile(userId).then(response => {
+            dispatch(toggleFetching(false))
+            dispatch(setUserProfile(response.data))
+            //this.props.setTotalUsersCount(response.data.totalCount)
+        })
+    }
+}
+
 
 export default profileReducer

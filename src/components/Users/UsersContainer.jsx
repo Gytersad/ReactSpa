@@ -1,36 +1,23 @@
 import {connect} from "react-redux";
 import Users from "./Users";
 import {
-    followAC,
-    setCurrentPageAC,
-    setTotalUsersCountAC,
-    setUsersAC,
-    toggleFetching, toggleFollowingProgress,
-    unfollowAC
+    follow,
+ getUsersThunkCreator,
+    setCurrentPageAC, unFollow,
+
 } from "../../redux/usersReducer";
 import React from "react";
 import Preloader from "../Preloader/Preloader";
-import {usersAPI} from "../../api/api";
 
 
 class UsersAPIComponent extends React.Component {
     componentDidMount() {
-        this.props.toggleFetching(true)
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-                this.props.toggleFetching(false)
-                this.props.setUsersAC(data.items)
-                //this.props.setTotalUsersCount(response.data.totalCount)
-            })
+        this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize);
     }
 
-    OnPageChanged = (p) => {
-        this.props.setCurrentPageAC(p)
-        this.props.toggleFetching(true)
-        usersAPI.getUsers(p, this.props.pageSize).then(data => {
-                this.props.toggleFetching(false)
-                this.props.setUsersAC(data.items)
-            })
-
+    OnPageChanged = (pageNumber) => {
+        this.props.setCurrentPageAC(pageNumber)
+        this.props.getUsersThunkCreator(pageNumber, this.props.pageSize);
     }
 
     render() {
@@ -42,10 +29,9 @@ class UsersAPIComponent extends React.Component {
             currentPage={this.props.currentPage}
             totalUsersCount = {this.props.totalUsersCount}
             OnPageChanged={this.OnPageChanged}
-            unfollowAC={this.props.unfollowAC}
-            followAC={this.props.followAC}
+            follow={this.props.follow}
+            unFollow={this.props.unFollow}
             followingInProgress={this.props.followingInProgress}
-            toggleFollowingProgress={this.props.toggleFollowingProgress}
         />
         </>
     }
@@ -84,7 +70,7 @@ let mapStateToProps = (state) => {
     }
 }*/
 
-const UsersContainer = connect(mapStateToProps,{followAC,unfollowAC,setUsersAC,
-        setCurrentPageAC, setTotalUsersCountAC,toggleFetching,toggleFollowingProgress})(UsersAPIComponent)
+const UsersContainer = connect(mapStateToProps,{follow,unFollow,
+        setCurrentPageAC, getUsersThunkCreator})(UsersAPIComponent)
 
 export default UsersContainer
