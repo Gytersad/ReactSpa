@@ -1,13 +1,13 @@
 import {connect} from "react-redux";
 import React from "react";
 import Header from "./Header";
-import {getAuthUserThank} from "../../redux/authReducer";
+import {getAuthUserThunk} from "../../redux/authReducer";
 
 
 
 class HeaderAPIComponent extends React.Component {
     componentDidMount() {
-        this.props.getAuthUserThank()
+        this.props.getAuthUserThunk()
     }
 
     render() {
@@ -24,7 +24,7 @@ let mapStateToProps = (state) => {
     }
 }
 
-const HeaderContainer = connect(mapStateToProps,{getAuthUserThank})(HeaderAPIComponent)
+const HeaderContainer = connect(mapStateToProps,{getAuthUserThunk})(HeaderAPIComponent)
 
 export default HeaderContainer
 
