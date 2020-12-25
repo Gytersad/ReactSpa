@@ -3,7 +3,7 @@ import React from "react";
 import Profile from "./Profile";
 import Preloader from "../Preloader/Preloader";
 import {getUserProfileThank, toggleFetching} from "../../redux/profileReducer";
-import {withRouter} from "react-router-dom";
+import {withRouter, Redirect} from "react-router-dom";
 
 
 class ProfileAPIComponent extends React.Component {
@@ -14,6 +14,9 @@ class ProfileAPIComponent extends React.Component {
     }
 
     render() {
+
+        if (!this.props.isAuth){return <Redirect to={'/login'}/>}
+
         return<>
                 { this.props.isFetching ? <Preloader/> : null}
                 <Profile profile={this.props.profile}/>
@@ -23,7 +26,9 @@ class ProfileAPIComponent extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        profile: state.profilePage.profile
+        profile: state.profilePage.profile,
+        isAuth: state.auth.isAuth
+
     }
 }
 
