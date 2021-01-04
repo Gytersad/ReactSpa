@@ -1,9 +1,10 @@
-import {usersAPI} from "../api/api";
+import {profileAPI, usersAPI} from "../api/api";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const TOGGLE_FETCHING = 'TOGGLE-FETCHING'
 const SET_USER_PROFILE = 'SET-USER-PROFILE'
+const SET_STATUS = 'SET-STATUS'
 
 let initialState = {
     posts: [
@@ -11,7 +12,8 @@ let initialState = {
         {id: 2, message: 'Yo', likesCount: 13}],
     newPostText: '',
     isFetching: false,
-    profile: null
+    profile: null,
+    status: ''
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -39,6 +41,9 @@ const profileReducer = (state = initialState, action) => {
         case SET_USER_PROFILE:{
             return {...state, profile: action.profile}
         }
+        case SET_STATUS: {
+            return {...state, status: action.status}
+        }
         default:
             return state;
     }
@@ -48,6 +53,8 @@ export const addPostActionCreator = (postId) => ({type: ADD_POST, postId: postId
 export const updateNewPostTextActionCreator = (text) => ({type: UPDATE_NEW_POST_TEXT, newText: text})
 export const toggleFetching = (isFetching) => ({type: TOGGLE_FETCHING, isFetching})
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile})
+export const setStatus = (status) => ({type: SET_STATUS, status})
+
 
 export const getUserProfileThank = (userId) =>{
     return (dispatch) => {
@@ -60,5 +67,23 @@ export const getUserProfileThank = (userId) =>{
     }
 }
 
+export const getStatusThank = (userId) =>{
+    return (dispatch) => {
+        profileAPI.getStatus(userId).then(response => {
+            dispatch(setStatus(response.data))
+        })
+    }
+}
+
+export const updateStatusThank = (status) =>{
+    return (dispatch) => {
+        profileAPI.updateStatus(status).then(response => {
+            if (response.data.resultCode === 0){
+                dispatch(setStatus(status))
+            }
+
+        })
+    }
+}
 
 export default profileReducer
