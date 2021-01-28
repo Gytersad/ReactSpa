@@ -1,0 +1,16 @@
+.formControl.error input {
+  border: 5px solid black;
+}
+.formControl.error textarea {
+  border: 5px solid black;
+}
+.formControl.error span {
+  color: black;
+}
+.formSummaryError {
+  border: 5px solid black;
+  padding: 5px;
+  color: black;
+  max-width: 200px;
+}
+/*# sourceMappingURL=FormsControl.module.css.map */

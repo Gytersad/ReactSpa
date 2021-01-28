@@ -15,7 +15,6 @@ const Users = (props) => {
     }
     return (
         <div className={c.content}>
-
             {pages.map(p =>
                 <span
                     key={p}
@@ -46,7 +45,7 @@ const Users = (props) => {
                 <span>
                             <div>{u.name}</div>
                             <div>{u.status}</div>
-                        </span>
+                </span>
 
             </div>)}
         </div>

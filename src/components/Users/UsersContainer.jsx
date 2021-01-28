@@ -4,12 +4,19 @@ import {
     follow,
  getUsersThunkCreator,
     setCurrentPageAC, unFollow,
-
 } from "../../redux/usersReducer";
 import React from "react";
-import Preloader from "../Preloader/Preloader";
+import Preloader from "../common/Preloader/Preloader";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
+import {
+    getCurrentPage,
+    getFollowingInProgress,
+    getIsFetching,
+    getPageSize,
+    getTotalUsersCount,
+    getUsers
+} from "../../redux/usersSelectors";
 
 
 class UsersAPIComponent extends React.Component {
@@ -31,14 +38,13 @@ class UsersAPIComponent extends React.Component {
 }
 
 let mapStateToProps = (state) => {
-
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state)
     }
 }
 /*let mapDispatchToProps = (dispatch) => {
@@ -65,7 +71,7 @@ let mapStateToProps = (state) => {
 
 export default compose(
     connect(mapStateToProps,{follow,unFollow,setCurrentPageAC, getUsersThunkCreator}),
-    withAuthRedirect
+    /*withAuthRedirect*/
 )
 (UsersAPIComponent)
 

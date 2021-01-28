@@ -1,7 +1,8 @@
 import React from "react";
 import c from './ProfileInfo.module.css';
-import Preloader from "../../../../Preloader/Preloader";
+import Preloader from "../../../../common/Preloader/Preloader";
 import ProfileStatus from "../ProfileStatys/ProfileStatus";
+import ProfileStatusWithHooks from "../ProfileStatys/ProfileStatusWithHooks";
 
 const ProfileInfo = (props) => {
     if (!props.profile) {
@@ -15,7 +16,7 @@ const ProfileInfo = (props) => {
                 <p>{props.profile.lookingForAJobDescription}</p>
                 <p>{props.profile.contacts.github}</p>
             </div>
-            <ProfileStatus status={props.status} updateStatusThank={props.updateStatusThank}/>
+            <ProfileStatusWithHooks status={props.status} updateStatusThank={props.updateStatusThank}/>
         </div>
     );
 }
